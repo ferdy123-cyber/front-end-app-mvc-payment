@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import "./App.css";
+import Auth from "./components/auth";
+import { getLoginStatus } from "./components/reducer/action";
+import Main from "./components/mainPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App({ isLogin, getLoginStatus }) {
+  console.log(isLogin);
+  if (!localStorage.getItem("isLogin")) {
+    localStorage.setItem("isLogin", "false");
+  }
+  useEffect(() => {
+    getLoginStatus();
+  }, [getLoginStatus]);
+  return <>{isLogin === "true" ? <Main /> : <Auth />}</>;
 }
 
-export default App;
+const stateReducer = (state) => {
+  return {
+    isLogin: state.isLogin,
+  };
+};
+
+const dispatchReducer = (dispatch) => ({
+  getLoginStatus: () => dispatch(getLoginStatus()),
+});
+
+export default connect(stateReducer, dispatchReducer)(App);
