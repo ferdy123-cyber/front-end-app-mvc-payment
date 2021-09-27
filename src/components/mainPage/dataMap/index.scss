@@ -1,0 +1,106 @@
+.dailyDataContainer {
+    width: 97%;
+    height: 98%;
+    margin: auto;
+    margin-top: 3px;
+    .totalMoneyData {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 70px;
+        h4 {
+            width: calc(100% - 270px);
+            margin-left: 10px;
+        }
+        p {
+            color: rgba(0, 0, 0, 0.8);
+            width: 200px;
+            font-size: 14px;
+        }
+        .income {
+            color: rgb(15, 179, 15);
+        }
+        .expense {
+            color: rgb(219, 22, 22);
+        }
+    }
+    .mapData {
+        width: 100%;
+        height: calc(100% - 80px);
+        background-color: rgb(245, 243, 243);
+        overflow: auto;
+        padding: 3px 0px;
+        .dateParent {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            // box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.199);
+            display: flex;
+            width: 98%;
+            min-height: 90px;
+            margin: 8px auto;
+            border-radius: 10px;
+            .date {
+                width: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                div {
+                    margin-left: 10px;
+                    p{
+                        font-size: 14px;
+                        color: rgba(0, 0, 0, 0.5)
+                    }
+                }
+                h1 {
+                    color: rgba(0, 0, 0, 0.5);
+                }
+            }
+            .mapContent {
+                width: calc(100% - 220px);
+                .totalDaily {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    p {
+                        text-align: center;
+                        width: 33%;
+                        margin-bottom: 10px;
+                        margin-top: 10px;
+                    }
+                    .income {
+                        color: rgb(15, 179, 15);
+                    }
+                    .expense {
+                        color: rgb(219, 22, 22);
+                    }
+                } 
+                .value {
+                    min-height: 60px;
+                    background-color: rgba(0, 0, 0, 0.074);
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                    div {
+                        display: flex;
+                        align-items: center;
+                        min-height: 60px;
+                        width: 100%;
+                        color: rgba(0, 0, 0, 0.8);
+                        margin-bottom: 3px;
+                        cursor: pointer;
+                        p {
+                            width: 33%;
+                            text-align: center;
+                            padding: 5px;
+                        }
+                        .income {
+                            color: rgb(15, 179, 15);
+                        }
+                        .expense {
+                            color: rgb(219, 22, 22);
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
