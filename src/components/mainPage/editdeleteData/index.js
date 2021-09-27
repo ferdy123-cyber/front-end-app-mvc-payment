@@ -1,26 +1,44 @@
 import { useState } from "react";
 import "./index.scss";
-import moment from "moment";
 import { connect } from "react-redux";
-import { setAddBox, addData } from "../../reducer/action";
+import {
+  resetAlert,
+  setEditDeleteData,
+  updateData,
+  deleteData,
+} from "../../reducer/action";
 
-const AddEditData = ({ setAddBox, addData, authLoading, alert }) => {
-  const [type, setType] = useState("income");
-  const [time, setTime] = useState(moment().format("YYYY-MM-DD"));
-  const [price, setPrice] = useState(null);
-  const [description, setDescription] = useState("");
-  const addDataHandle = () => {
-    addData({
+const EditDeleteData = ({
+  authLoading,
+  alert,
+  resetAlert,
+  setEditDeleteData,
+  dataToUpdate,
+  updateData,
+  deleteData,
+}) => {
+  const [type, setType] = useState(dataToUpdate.type);
+  const [price, setPrice] = useState(dataToUpdate.price);
+  const [description, setDescription] = useState(dataToUpdate.description);
+  const close = () => {
+    setEditDeleteData(false);
+    resetAlert();
+  };
+  const updateHandle = () => {
+    updateData({
+      id: dataToUpdate.id,
       type: type,
-      time: time,
-      price: price,
       description: description,
+      time: dataToUpdate.time,
+      price: price,
     });
   };
-  const close = (data) => {
-    setAddBox(data);
+  const deleteHandle = () => {
+    setEditDeleteData(false);
+    resetAlert();
+    deleteData(dataToUpdate.id);
   };
-  console.log(authLoading);
+  console.log(dataToUpdate);
   return (
     <div className="addEditContainer">
       <div className="inputBox">
@@ -39,11 +57,7 @@ const AddEditData = ({ setAddBox, addData, authLoading, alert }) => {
           </div>
         </div>
         <div className="addInput">
-          <input
-            value={time}
-            type="date"
-            onChange={(e) => setTime(e.target.value)}
-          />
+          <input value={dataToUpdate.time} type="date" />
           <input
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -55,12 +69,15 @@ const AddEditData = ({ setAddBox, addData, authLoading, alert }) => {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description..."
           />
-          <div className="btn">
-            <button onClick={() => close(false)} className="grey">
+          <div className="btnUpdate">
+            <button onClick={() => close()} className="grey">
               Cancel
             </button>
+            <button className="red" onClick={() => deleteHandle()}>
+              Delete
+            </button>
             {authLoading === false ? (
-              <button onClick={() => addDataHandle()}>Add</button>
+              <button onClick={() => updateHandle()}>Update</button>
             ) : (
               <button>Loading...</button>
             )}
@@ -79,14 +96,17 @@ const stateReducer = (state) => {
     openAddBox: state.openAddBox,
     authLoading: state.authLoading,
     alert: state.alert,
+    dataToUpdate: state.dataToUpdate,
   };
 };
 
 const dispatchReducer = (dispatch) => ({
   // logout: () => dispatch(logout()),
   // getDataDaily: () => dispatch(getDataDaily()),
-  setAddBox: (data) => dispatch(setAddBox(data)),
-  addData: (data) => dispatch(addData(data)),
+  resetAlert: () => dispatch(resetAlert()),
+  setEditDeleteData: (data) => dispatch(setEditDeleteData(data)),
+  updateData: (data) => dispatch(updateData(data)),
+  deleteData: (data) => dispatch(deleteData(data)),
 });
 
-export default connect(stateReducer, dispatchReducer)(AddEditData);
+export default connect(stateReducer, dispatchReducer)(EditDeleteData);

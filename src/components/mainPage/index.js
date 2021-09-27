@@ -2,31 +2,24 @@ import "./index.scss";
 import { logout, setAddBox } from "../reducer/action";
 import { connect } from "react-redux";
 import DataDaily from "./dataMap/dataDaily";
-import AddEditData from "./addEditData/index";
+import AddEditData from "./adddata/index";
+import EditdeleteData from "./editdeleteData";
 
-const Main = ({ logout, openAddBox, setAddBox }) => {
+const Main = ({ logout, openAddBox, setAddBox, editDeleteBox }) => {
   return (
     <div className="body">
       <div className="dataContent">
         <div className="menuContent">
           <h2>My App</h2>
           <div className="menu">
-            <select>
+            {/* <select>
               <option>Daily</option>
               <option>Weekly</option>
               <option>Monthly</option>
               <option>Show all</option>
-            </select>
-            <select>
-              <option>Select chategory...</option>
-              <option>Food</option>
-              <option>Sport</option>
-              <option>Electronic</option>
-            </select>
-            <button onClick={() => setAddBox(true)}>Add data +</button>
-            {/* <input placeholder="Search by nominal..." type="number" /> */}
-            <p onClick={() => logout()}>Logout</p>
+            </select> */}
             {/* <input
+              value="ok"
               type="date"
               onChange={(e) =>
                 console.log(
@@ -35,6 +28,15 @@ const Main = ({ logout, openAddBox, setAddBox }) => {
                 )
               }
             /> */}
+            {/* <select>
+              <option>Select chategory...</option>
+              <option>Food</option>
+              <option>Sport</option>
+              <option>Electronic</option>
+            </select> */}
+            <button onClick={() => setAddBox(true)}>Add data +</button>
+            {/* <input placeholder="Search by nominal..." type="number" /> */}
+            <p onClick={() => logout()}>Logout</p>
           </div>
         </div>
         <div className="mainData">
@@ -42,6 +44,7 @@ const Main = ({ logout, openAddBox, setAddBox }) => {
         </div>
       </div>
       {openAddBox === true && <AddEditData />}
+      {editDeleteBox === true && <EditdeleteData />}
     </div>
   );
 };
@@ -49,6 +52,7 @@ const Main = ({ logout, openAddBox, setAddBox }) => {
 const stateReducer = (state) => {
   return {
     openAddBox: state.openAddBox,
+    editDeleteBox: state.editDeleteBox,
   };
 };
 

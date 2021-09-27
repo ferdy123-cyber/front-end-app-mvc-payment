@@ -1,5 +1,156 @@
 import axios from "axios";
 
+export const sendData = (data) => (dispatch) => {
+  dispatch({
+    type: "sendData",
+    value: data,
+  });
+};
+
+export const resetAlert = () => (dispatch) => {
+  console.log("ok");
+  dispatch({
+    type: "alert",
+    value: {
+      type: "",
+      text: "",
+    },
+  });
+};
+
+export const setEditDeleteData = (data) => (dispatch) => {
+  dispatch({
+    type: "editDeleteBox",
+    value: data,
+  });
+};
+
+export const deleteData = (data) => (dispatch) => {
+  dispatch({
+    type: "authLoading",
+    value: true,
+  });
+  if (data.price === null || data.description === "") {
+    dispatch({
+      type: "alert",
+      value: {
+        type: "error",
+        text: "The fields cannot be null",
+      },
+    });
+    dispatch({
+      type: "authLoading",
+      value: false,
+    });
+  } else {
+    axios
+      .delete(`http://localhost:5000/data/${data}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        axios
+          .get("http://localhost:5000/data/getDataDaily", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((response) =>
+            dispatch({
+              type: "getData",
+              value: response.data.data.reverse(),
+            })
+          )
+          .catch((error) => {
+            if (error.response && error.response.data) {
+              console.log(error.response.data.error);
+            } else {
+              console.log(error.message);
+            }
+          });
+        dispatch({
+          type: "authLoading",
+          value: false,
+        });
+        dispatch({
+          type: "editDeleteBox",
+          value: false,
+        });
+      })
+      .catch((error) => {
+        if (error.response && error.response.data) {
+          console.log(error.response.data.error);
+        } else {
+          console.log(error.message);
+        }
+      });
+  }
+};
+
+export const updateData = (data) => (dispatch) => {
+  dispatch({
+    type: "authLoading",
+    value: true,
+  });
+  if (data.price === null || data.description === "") {
+    dispatch({
+      type: "alert",
+      value: {
+        type: "error",
+        text: "The fields cannot be null",
+      },
+    });
+    dispatch({
+      type: "authLoading",
+      value: false,
+    });
+  } else {
+    axios
+      .patch("http://localhost:5000/data/updateData", data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => {
+        axios
+          .get("http://localhost:5000/data/getDataDaily", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((response) =>
+            dispatch({
+              type: "getData",
+              value: response.data.data.reverse(),
+            })
+          )
+          .catch((error) => {
+            if (error.response && error.response.data) {
+              console.log(error.response.data.error);
+            } else {
+              console.log(error.message);
+            }
+          });
+        dispatch({
+          type: "authLoading",
+          value: false,
+        });
+        dispatch({
+          type: "editDeleteBox",
+          value: false,
+        });
+      })
+      .catch((error) => {
+        if (error.response && error.response.data) {
+          console.log(error.response.data.error);
+        } else {
+          console.log(error.message);
+        }
+      });
+  }
+};
+
 export const addData = (data) => (dispatch) => {
   dispatch({
     type: "authLoading",
