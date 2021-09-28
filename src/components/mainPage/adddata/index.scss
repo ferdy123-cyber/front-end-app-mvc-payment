@@ -15,7 +15,8 @@
         left: 0;
         right: 0;
         margin: auto;
-        width: 400px;
+        width: 97vw;
+        max-width: 400px;
         height: 500px;
         background-color: rgb(245, 243, 243);
         overflow: hidden;
@@ -63,7 +64,7 @@
             .btn {
                 width: 100%;
                 button {
-                    width: 150px;
+                    width: 40%;
                     height: 50px;
                     margin-right: 5px;
                     margin-left: 5px;

@@ -36,8 +36,8 @@ const Auth = ({ alert, register, login, resetAlert, authLoading }) => {
           </div>
         </div>
         <div
-          className="authForm"
-          style={authActive !== "" ? { left: "50%" } : { left: "0" }}
+          className={`authForm ${authActive !== "" ? "right" : "left"}`}
+          // style={authActive !== "" ? { left: "50%" } : { left: "0" }}
         >
           {alert.type === "error" && (
             <div className="error alert">{alert.text}</div>

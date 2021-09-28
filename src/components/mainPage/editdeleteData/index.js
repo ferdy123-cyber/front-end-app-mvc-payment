@@ -57,7 +57,11 @@ const EditDeleteData = ({
           </div>
         </div>
         <div className="addInput">
-          <input value={dataToUpdate.time} type="date" />
+          <input
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+            value={dataToUpdate.time}
+            type="date"
+          />
           <input
             value={price}
             onChange={(e) => setPrice(e.target.value)}

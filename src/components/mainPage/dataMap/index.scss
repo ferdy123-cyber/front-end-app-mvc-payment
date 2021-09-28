@@ -70,10 +70,13 @@
                     justify-content: center;
                     align-items: center;
                     p {
-                        text-align: center;
+                        text-align: end;
                         width: 33%;
                         margin-bottom: 10px;
                         margin-top: 10px;
+                    }
+                    .datePhone {
+                        display: none;
                     }
                     .income {
                         color: rgb(15, 179, 15);
@@ -198,6 +201,7 @@
             p {
                 font-size: 13px;
                 width: 350px;
+                text-align: center;
             }
         }
     }
@@ -207,6 +211,7 @@
     .dailyDataContainer {
         .mapData {
             .dateParent {
+                justify-content: center;
                 .date {
                     width: 90px;
                     text-align: center;
@@ -222,15 +227,37 @@
                     }
                 }
                 .mapContent {
-                    width: 100%;
+                    width: 98%;
+                    .totalDaily {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .datePhone {
+                            display: block;
+                        }
+                        p {
+                            text-align: center;
+                            width: 33%;
+                            margin-bottom: 10px;
+                            margin-top: 10px;
+                            font-size: 13px;
+                        }
+                        .income {
+                            color: rgb(15, 179, 15);
+                        }
+                        .expense {
+                            color: rgb(219, 22, 22);
+                        }
+                    } 
                 }
+            
             }
         }
-        // .totalMoneyData {
-        //     p {
-        //         font-size: 13px;
-        //         width: 350px;
-        //     }
-        // }
+        .totalMoneyData {
+            justify-content: center;
+            h4 {
+                display: none;
+            }
+        }
     }
 }

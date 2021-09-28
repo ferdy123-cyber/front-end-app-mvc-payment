@@ -84,7 +84,9 @@ const DataDaily = ({ data, getDataDaily, setEditDeleteData, sendData }) => {
                     </div>
                     <div className="mapContent">
                       <div className="totalDaily">
-                        <p></p>
+                        <p className="datePhone">
+                          {moment(e.date).format("DD-MM-YYYY")}
+                        </p>
                         <p className="income">
                           IDR{" "}
                           {e.total_income
@@ -128,10 +130,7 @@ const DataDaily = ({ data, getDataDaily, setEditDeleteData, sendData }) => {
                                 }
                               >
                                 <p>{val.type}</p>
-                                <p className="desxText">
-                                  {val.description} ojenwfoi oeiwnofi oewnfoiew
-                                  oenfoiwen
-                                </p>
+                                <p className="desxText">{val.description}</p>
                                 <p
                                   className={
                                     val.type === "income" ? "income" : "expense"
